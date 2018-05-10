@@ -21,11 +21,14 @@ These dotfiles provide some additional git and bash aliases:
 
 ### Bash functions
 `clone <project>`: Clones an HA git project into ~/code/anna/<project name>. Has tab completion, but it's slow!
+
 `p <project>`: Switches into any git project that is located in a subdirectory under ~/code. E.g. 'p anna-frontend'. Has tab completion.
 
 ### Git functions
 `git lg`: Pretty coloured compact log with a tree
+
 `git l`: Last 10 lines of the 'git lg' log
+
 `git st`: Short for 'git status'
 
 ### Misc
