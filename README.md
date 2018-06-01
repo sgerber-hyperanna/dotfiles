@@ -24,7 +24,9 @@ These dotfiles provide some additional git and bash aliases:
 
 `p <project>`: Switches into any git project that is located in a subdirectory under ~/code. E.g. 'p anna-frontend'. Has tab completion.
 
-### Git functions
+`pr "<summary"`: Opens a pull request to either integration (if present) or master from your current branch.
+
+### Git aliases
 `git lg`: Pretty coloured compact log with a tree
 
 `git l`: Last 10 lines of the 'git lg' log

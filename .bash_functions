@@ -1,3 +1,37 @@
+pr() {
+    if ! git rev-parse --is-inside-work-tree &>/dev/null ; then
+        echo "You are not in a git repository. Please execute this script inside a HyperAnna git repository"
+        return 1
+    fi
+
+    if ! git remote show origin -n | grep -q hyperanna01 ; then
+        echo "You are not in a HyperAnna github repository. Please execute this script inside a HyperAnna git repository."
+        return 1
+    fi
+
+    if [ "$#" -ne 1 ]; then
+        echo "Illegal number of parameters"
+        echo "Usage $0 '<pull request title>'"
+        return 1
+    fi
+
+    local pr_title=$1
+    local current_repo=hyperanna01/$(basename $(git rev-parse --show-toplevel))
+    local current_branch=$(git rev-parse --abbrev-ref HEAD)
+    local target_branch="master"
+
+    if git branch -rl | grep -q integration$ ; then
+        target_branch="integration"
+    fi
+
+    if [[ ${current_branch} == ${target_branch} ]]; then
+        echo "You cannot open a pull request from ${current_branch} to itself. Please switch to another branch"
+        return 1
+    fi
+
+    ok.sh create_pull_request ${current_repo} "${pr_title}" ${current_branch} ${target_branch}
+}
+
 clone() {
 	local PROJECT=$1
 	local PROJECT_DIR=~/code/anna/$PROJECT
